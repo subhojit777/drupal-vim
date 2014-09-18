@@ -19,6 +19,8 @@ Plugin 'technosophos/drupal-snippets'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'honza/vim-snippets'
 Plugin 'dahu/SearchParty'
+Plugin 'xolox/vim-misc'
+Plugin 'xolox/vim-session'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -103,6 +105,12 @@ let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
 " Instead of reverting the cursor to the last position in the buffer, we
 " set it to the first line when editing a git commit message
 au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
+
+" vim-session settings
+let g:session_autosave = 0			" Session will be saved manually
+let g:session_autoload = 'yes'			" Restore last session
+let g:session_directory = "~/.vimsessions"	" Store vim sessions in another location. Make sure you do `mkdir ~/.vimsessions` before using this setting
+let g:session_default_to_last = 1		" Restore last session
 
 " Default vim settings
 set mouse=a			" Enable mouse
