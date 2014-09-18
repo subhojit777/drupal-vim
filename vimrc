@@ -20,6 +20,7 @@ Plugin 'honza/vim-snippets'
 Plugin 'dahu/SearchParty'
 Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-session'
+Plugin 'flazz/vim-colorschemes'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -65,7 +66,7 @@ nmap <F7> :NERDTreeToggle<CR>
 
 " Default colorscheme
 " Make sure you have molokai colorscheme present
-" colorscheme molokai
+colorscheme badwolf
 
 " XDebug Debugger port
 let g:debuggerPort = 9000
