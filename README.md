@@ -1,4 +1,4 @@
-# Vim plugins for Drupal development
+# Vim plugins and settings for Drupal development
 
 Just another set of vim plugins and settings that will ease writing Drupal code
 in vim. The settings will work in graphical vim
@@ -17,4 +17,4 @@ in vim. The settings will work in graphical vim
 
 And you are good to go! Enjoy vim :)
 
-#### P.S. Please create issues [here](https://github.com/subhojit777/drupal-vim/issues/new) if you are having any problem during installation.
+**P.S. Please create issues [here](https://github.com/subhojit777/drupal-vim/issues/new) if you are having any problem during installation.**
