@@ -21,6 +21,8 @@ Plugin 'dahu/SearchParty'
 Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-session'
 Plugin 'flazz/vim-colorschemes'
+Plugin 'tpope/vim-fugitive'
+Plugin 'ntpeters/vim-better-whitespace'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -64,10 +66,6 @@ endif
 nmap <F8> :TagbarToggle<CR>
 nmap <F7> :NERDTreeToggle<CR>
 
-" Default colorscheme
-" Make sure you have molokai colorscheme present
-colorscheme badwolf
-
 " XDebug Debugger port
 let g:debuggerPort = 9000
 
@@ -80,6 +78,10 @@ let g:ctrlp_by_filename = 1
 let g:ctrlp_match_window = 'bottom,order:ttb,min:1,max:20,results:20'
 let g:ctrlp_open_new_file = 't'
 let g:ctrlp_mruf_case_sensitive = 0
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'file': '\v\.(jpg|jpeg|png|gif)$',
+  \ }
 
 " Store backups in separate directory
 " Make sure you do `mkdir ~/vimtmp` before using this setting
@@ -112,6 +114,23 @@ let g:session_autoload = 'yes'			" Restore last session
 let g:session_directory = "~/.vimsessions"	" Store vim sessions in another location. Make sure you do `mkdir ~/.vimsessions` before using this setting
 let g:session_default_to_last = 1		" Restore last session
 
+" vim-airline settings
+let g:airline#extensions#branch#enabled = 1
+let g:airline#extensions#whitespace#enabled = 1
+let g:airline#extensions#whitespace#symbol = '!'
+let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing' ]
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '◀'
+let g:airline_symbols.linenr = '␤'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'ρ'
+
+" markdown syntax highlighting
+au BufRead,BufNewFile *.md set filetype=markdown
+
 " Default vim settings
 set mouse=a			" Enable mouse
 set number			" Show line numbers
@@ -128,6 +147,8 @@ set smartcase 			" Case sensitive when uc present
 set wildmenu 			" Show list instead of just completing
 set wildmode=list:longest,full 	" Command <Tab> completion, list matches, then longest common part, then all.
 set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic whitespace
+set fileformat=unix		" UNIX fileformat
+set endofline			" Newline at the end of file
 
 " End of vimrc-install additions.
 source $VIMRUNTIME/vimrc_example.vim
