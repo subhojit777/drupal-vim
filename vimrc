@@ -109,10 +109,11 @@ let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
 au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
 
 " vim-session settings
-let g:session_autosave = 0			" Session will be saved manually
-let g:session_autoload = 'yes'			" Restore last session
 let g:session_directory = "~/.vimsessions"	" Store vim sessions in another location. Make sure you do `mkdir ~/.vimsessions` before using this setting
 let g:session_default_to_last = 1		" Restore last session
+let g:session_autoload = 'yes'			" Restore last session
+let g:session_autosave = 'yes'			" Session will be saved manually
+let g:session_default_overwrite = 0		" Do not override default session
 
 " vim-airline settings
 let g:airline#extensions#branch#enabled = 1
