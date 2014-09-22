@@ -8,7 +8,7 @@ in vim. The settings will work in graphical vim
 ```
 1. cd
 2. git clone git@github.com:subhojit777/drupal-vim.git
-3. cp ~/.vim ~/.vim-bak // If you have vim settings. Else, proceed to next step
+3. cp -R ~/.vim ~/.vim-bak // If you have vim settings. Else, proceed to next step
 4. mv drupal-vim ~/.vim
 5. cp ~/.vim/vimrc ~/.vimrc
 6. cp ~/.vim/gvimrc ~/.gvimrc // If you have graphical vim installed
