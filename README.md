@@ -11,7 +11,7 @@ in vim. The settings will work in graphical vim
 3. git clone git@github.com:subhojit777/drupal-vim.git ~/.vim
 4. git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 5. ln -s ~/.vim/vimrc ~/.vimrc
-6. ls -s ~/.vim/gvimrc ~/.gvimrc // If you have graphical vim installed
+6. ln -s ~/.vim/gvimrc ~/.gvimrc // If you have graphical vim installed
 7. vim +BundleInstall +qall
 ```
 
