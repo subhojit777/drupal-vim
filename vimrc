@@ -23,6 +23,10 @@ Plugin 'xolox/vim-session'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'tpope/vim-fugitive'
 Plugin 'ntpeters/vim-better-whitespace'
+Plugin 'evidens/vim-twig'
+Plugin 'joonty/vdebug'
+Plugin 'tpope/vim-haml'
+Plugin 'ap/vim-css-color'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -43,10 +47,26 @@ endif
 nnoremap <C-S-tab> :tabprevious<CR>
 nnoremap <C-tab>   :tabnext<CR>
 nnoremap <C-n>     :tabnew<CR>
+nnoremap <A-1>     1gt
+nnoremap <A-2>     2gt
+nnoremap <A-3>     3gt
+nnoremap <A-4>     4gt
+nnoremap <A-5>     5gt
+nnoremap <A-6>     6gt
+nnoremap <A-7>     7gt
+nnoremap <A-8>     8gt
 nnoremap <A-9>     :tablast<CR>
 inoremap <C-S-tab> <Esc>:tabprevious<CR>
 inoremap <C-tab>   <Esc>:tabnext<CR>
 inoremap <C-n>     <Esc>:tabnew<CR>
+inoremap <A-1>     <Esc>1gt
+inoremap <A-2>     <Esc>2gt
+inoremap <A-3>     <Esc>3gt
+inoremap <A-4>     <Esc>4gt
+inoremap <A-5>     <Esc>5gt
+inoremap <A-6>     <Esc>6gt
+inoremap <A-7>     <Esc>7gt
+inoremap <A-8>     <Esc>8gt
 inoremap <A-9>     <Esc>:tablast<CR>
 
 " easy indentation
@@ -77,11 +97,11 @@ nnoremap <silent> <A-Right> :execute 'silent! tabmove ' . tabpagenr()<CR>
 let g:ctrlp_by_filename = 1
 let g:ctrlp_match_window = 'bottom,order:ttb,min:1,max:20,results:20'
 let g:ctrlp_open_new_file = 't'
-let g:ctrlp_mruf_case_sensitive = 0
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
   \ 'file': '\v\.(jpg|jpeg|png|gif)$',
   \ }
+let g:ctrlp_mruf_case_sensitive = 0
 
 " Store backups in separate directory
 " Make sure you do `mkdir ~/vimtmp` before using this setting
@@ -132,6 +152,12 @@ let g:airline_symbols.paste = 'ρ'
 " markdown syntax highlighting
 au BufRead,BufNewFile *.md set filetype=markdown
 
+" sublime text like project switch
+nnoremap <C-A-p> :OpenSession<CR>
+
+" remove trailing whitespace on save
+autocmd BufWritePre * :%s/\s\+$//e
+
 " Default vim settings
 set mouse=a			" Enable mouse
 set number			" Show line numbers
@@ -150,6 +176,7 @@ set wildmode=list:longest,full 	" Command <Tab> completion, list matches, then l
 set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic whitespace
 set fileformat=unix		" UNIX fileformat
 set endofline			" Newline at the end of file
+set autoread			" Autoreload changes to file
 
 " End of vimrc-install additions.
 source $VIMRUNTIME/vimrc_example.vim
