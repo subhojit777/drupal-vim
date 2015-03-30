@@ -27,6 +27,7 @@ Plugin 'evidens/vim-twig'
 Plugin 'joonty/vdebug'
 Plugin 'tpope/vim-haml'
 Plugin 'ap/vim-css-color'
+Plugin 'valloric/MatchTagAlways'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -102,6 +103,8 @@ let g:ctrlp_custom_ignore = {
   \ 'file': '\v\.(jpg|jpeg|png|gif)$',
   \ }
 let g:ctrlp_mruf_case_sensitive = 0
+" ignore files in .gitignore
+let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 
 " Store backups in separate directory
 " Make sure you do `mkdir ~/vimtmp` before using this setting
@@ -115,6 +118,7 @@ let g:neocomplete#enable_auto_select = 1
 
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
 
@@ -123,6 +127,25 @@ if !exists('g:neocomplete#sources#omni#input_patterns')
   let g:neocomplete#sources#omni#input_patterns = {}
 endif
 let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+
+" Plugin key-mappings.
+inoremap <expr><C-g>     neocomplete#undo_completion()
+inoremap <expr><C-l>     neocomplete#complete_common_string()
+
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  return neocomplete#close_popup() . "\<CR>"
+  " For no inserting <CR> key.
+  "return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+endfunction
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><C-y>  neocomplete#close_popup()
+inoremap <expr><C-e>  neocomplete#cancel_popup()
 
 " Instead of reverting the cursor to the last position in the buffer, we
 " set it to the first line when editing a git commit message
@@ -157,6 +180,16 @@ nnoremap <C-A-p> :OpenSession<CR>
 
 " remove trailing whitespace on save
 autocmd BufWritePre * :%s/\s\+$//e
+
+" MatchTagAlways settings
+" enable match tags in php template files
+let g:mta_filetypes = {
+    \ 'html' : 1,
+    \ 'xhtml' : 1,
+    \ 'xml' : 1,
+    \ 'jinja' : 1,
+    \ 'php' : 1,
+    \}
 
 " Default vim settings
 set mouse=a			" Enable mouse
