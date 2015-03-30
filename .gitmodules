@@ -43,3 +43,6 @@
 [submodule "bundle/vdebug"]
 	path = bundle/vdebug
 	url = git@github.com:joonty/vdebug
+[submodule "bundle/MatchTagAlways"]
+	path = bundle/MatchTagAlways
+	url = git@github.com:Valloric/MatchTagAlways.git
