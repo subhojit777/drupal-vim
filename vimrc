@@ -132,15 +132,6 @@ let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
 inoremap <expr><C-g>     neocomplete#undo_completion()
 inoremap <expr><C-l>     neocomplete#complete_common_string()
 
-" <CR>: close popup and save indent.
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-  return neocomplete#close_popup() . "\<CR>"
-  " For no inserting <CR> key.
-  "return pumvisible() ? neocomplete#close_popup() : "\<CR>"
-endfunction
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 " <C-h>, <BS>: close popup and delete backword char.
 inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
 inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
@@ -210,6 +201,8 @@ set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic white
 set fileformat=unix		" UNIX fileformat
 set endofline			" Newline at the end of file
 set autoread			" Autoreload changes to file
+set undofile			" Do not set undo file
+set undodir=~/vimtmp		" Store undo files in a directory
 
 " End of vimrc-install additions.
 source $VIMRUNTIME/vimrc_example.vim
