@@ -28,6 +28,7 @@ Plugin 'joonty/vdebug'
 Plugin 'tpope/vim-haml'
 Plugin 'ap/vim-css-color'
 Plugin 'valloric/MatchTagAlways'
+Plugin 'majutsushi/tagbar'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -69,6 +70,25 @@ inoremap <A-6>     <Esc>6gt
 inoremap <A-7>     <Esc>7gt
 inoremap <A-8>     <Esc>8gt
 inoremap <A-9>     <Esc>:tablast<CR>
+" for Mac
+nnoremap <D-1>     1gt
+nnoremap <D-2>     2gt
+nnoremap <D-3>     3gt
+nnoremap <D-4>     4gt
+nnoremap <D-5>     5gt
+nnoremap <D-6>     6gt
+nnoremap <D-7>     7gt
+nnoremap <D-8>     8gt
+nnoremap <D-9>     :tablast<CR>
+inoremap <D-1>     <Esc>1gt
+inoremap <D-2>     <Esc>2gt
+inoremap <D-3>     <Esc>3gt
+inoremap <D-4>     <Esc>4gt
+inoremap <D-5>     <Esc>5gt
+inoremap <D-6>     <Esc>6gt
+inoremap <D-7>     <Esc>7gt
+inoremap <D-8>     <Esc>8gt
+inoremap <D-9>     <Esc>:tablast<CR>
 
 " easy indentation
 nmap <tab> a<C-t><Esc>
@@ -105,6 +125,7 @@ let g:ctrlp_custom_ignore = {
 let g:ctrlp_mruf_case_sensitive = 0
 " ignore files in .gitignore
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+let g:ctrlp_working_path_mode = 0
 
 " Store backups in separate directory
 " Make sure you do `mkdir ~/vimtmp` before using this setting
@@ -182,6 +203,9 @@ let g:mta_filetypes = {
     \ 'php' : 1,
     \}
 
+" Syntastic settings
+let g:syntastic_php_phpcs_args="--standard=Drupal --extensions=php,module,inc,install,test,profile,theme"
+
 " Default vim settings
 set mouse=a			" Enable mouse
 set number			" Show line numbers
@@ -201,7 +225,7 @@ set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic white
 set fileformat=unix		" UNIX fileformat
 set endofline			" Newline at the end of file
 set autoread			" Autoreload changes to file
-set undofile			" Do not set undo file
+set noundofile			" Do not create undo files
 set undodir=~/vimtmp		" Store undo files in a directory
 
 " End of vimrc-install additions.
