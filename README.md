@@ -9,7 +9,7 @@ in vim. The settings will work in graphical vim
 1. cd
 2. mv ~/.vim ~/.vim-bak // If you have vim settings. Else, proceed to next step
 3. git clone git@github.com:subhojit777/drupal-vim.git ~/.vim
-4. git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+4. git clone git@github.com:VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 5. cp ~/.vim/vimrc ~/.vimrc
 6. cp ~/.vim/gvimrc ~/.gvimrc // If you have graphical vim installed
 7. mkdir ~/.vimsessions
