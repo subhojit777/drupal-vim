@@ -186,9 +186,15 @@ let g:airline_symbols.branch = '⎇'
 let g:airline_symbols.paste = 'ρ'
 
 " vdebug settings
+" Make sure xdebug is configured to port number 9001
 let g:vdebug_options= {
 \    "port" : 9001,
 \}
+let g:vdebug_features['max_depth'] = -1
+let g:vdebug_features['max_children'] = -1
+let g:vdebug_features['max_data'] = -1
+nnoremap <F8>  :BreakpointRemove *<CR>
+inoremap <F8> <Esc>:BreakpointRemove *<CR>
 
 " markdown syntax highlighting
 au BufRead,BufNewFile *.md set filetype=markdown
