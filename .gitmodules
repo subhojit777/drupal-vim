@@ -1,9 +1,6 @@
 [submodule "bundle/auto-pairs"]
 	path = bundle/auto-pairs
 	url = git@github.com:jiangmiao/auto-pairs.git
-[submodule "bundle/ctrlp.vim"]
-	path = bundle/ctrlp.vim
-	url = git@github.com:kien/ctrlp.vim.git
 [submodule "bundle/drupal-snippets"]
 	path = bundle/drupal-snippets
 	url = git@github.com:technosophos/drupal-snippets.git
@@ -49,3 +46,6 @@
 [submodule "bundle/tagbar"]
 	path = bundle/tagbar
 	url = git@github.com:majutsushi/tagbar.git
+[submodule "bundle/ctrlp.vim"]
+	path = bundle/ctrlp.vim
+	url = git@github.com:ctrlpvim/ctrlp.vim.git
