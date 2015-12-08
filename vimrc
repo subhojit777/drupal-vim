@@ -185,6 +185,11 @@ let g:airline_symbols.linenr = '␤'
 let g:airline_symbols.branch = '⎇'
 let g:airline_symbols.paste = 'ρ'
 
+" vdebug settings
+let g:vdebug_options= {
+\    "port" : 9001,
+\}
+
 " markdown syntax highlighting
 au BufRead,BufNewFile *.md set filetype=markdown
 
@@ -205,7 +210,7 @@ let g:mta_filetypes = {
     \}
 
 " Syntastic settings
-let g:syntastic_php_phpcs_args="--standard=Drupal --extensions=php,module,inc,install,test,profile,theme"
+"let g:syntastic_php_phpcs_args="--standard=Drupal --extensions=php,module,inc,install,test,profile,theme"
 
 " Default vim settings
 set mouse=a			" Enable mouse
