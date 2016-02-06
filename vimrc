@@ -28,6 +28,7 @@ Plugin 'ap/vim-css-color'
 Plugin 'valloric/MatchTagAlways'
 Plugin 'majutsushi/tagbar'
 Plugin 'tpope/vim-surround'
+Plugin 'jiangmiao/auto-pairs'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
