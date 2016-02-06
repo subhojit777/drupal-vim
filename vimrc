@@ -7,7 +7,6 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'gmarik/vundle'
 Plugin 'scrooloose/nerdtree'
 Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'Shougo/neocomplete.vim'
 Plugin 'bling/vim-airline'
@@ -15,7 +14,6 @@ Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
 Plugin 'technosophos/drupal-snippets'
-Plugin 'jiangmiao/auto-pairs'
 Plugin 'honza/vim-snippets'
 Plugin 'dahu/SearchParty'
 Plugin 'xolox/vim-misc'
@@ -107,9 +105,6 @@ endif
 nmap <F8> :TagbarToggle<CR>
 nmap <F7> :NERDTreeToggle<CR>
 
-" XDebug Debugger port
-let g:debuggerPort = 9000
-
 " Move tabs with alt + left|right
 nnoremap <silent> <A-Left> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
 nnoremap <silent> <A-Right> :execute 'silent! tabmove ' . tabpagenr()<CR>
@@ -189,10 +184,10 @@ let g:airline_symbols.paste = 'ρ'
 " Make sure xdebug is configured to port number 9001
 let g:vdebug_options= {
 \    "port" : 9001,
+\    "server": "localhost",
+\    "debug_file_level" : 2,
+\    "debug_file" : '/tmp/vdebug.log',
 \}
-let g:vdebug_features['max_depth'] = -1
-let g:vdebug_features['max_children'] = -1
-let g:vdebug_features['max_data'] = -1
 nnoremap <F8>  :BreakpointRemove *<CR>
 inoremap <F8> <Esc>:BreakpointRemove *<CR>
 
