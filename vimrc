@@ -27,6 +27,7 @@ Plugin 'tpope/vim-haml'
 Plugin 'ap/vim-css-color'
 Plugin 'valloric/MatchTagAlways'
 Plugin 'majutsushi/tagbar'
+Plugin 'tpope/vim-surround'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
