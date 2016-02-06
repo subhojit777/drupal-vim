@@ -1,6 +1,3 @@
-[submodule "bundle/auto-pairs"]
-	path = bundle/auto-pairs
-	url = git@github.com:jiangmiao/auto-pairs.git
 [submodule "bundle/drupal-snippets"]
 	path = bundle/drupal-snippets
 	url = git@github.com:technosophos/drupal-snippets.git
@@ -13,9 +10,6 @@
 [submodule "bundle/nerdtree"]
 	path = bundle/nerdtree
 	url = git@github.com:scrooloose/nerdtree.git
-[submodule "bundle/syntastic"]
-	path = bundle/syntastic
-	url = git@github.com:scrooloose/syntastic.git
 [submodule "bundle/vim-airline"]
 	path = bundle/vim-airline
 	url = git@github.com:bling/vim-airline.git
