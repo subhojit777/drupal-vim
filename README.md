@@ -14,7 +14,9 @@ in vim. The settings will work in graphical vim
 6. cp ~/.vim/gvimrc ~/.gvimrc // If you have graphical vim installed
 7. mkdir ~/.vimsessions
 8. mkdir ~/vimtmp
-9. vim +BundleInstall +qall
+9. `sudo apt-get install exuberant-ctags` // Install exuberant-ctags on Ubuntu/Debian
+10. `brew install ctags` // Install exuberant-ctags on OSX
+11. vim +BundleInstall +qall
 ```
 
 And you are good to go! Enjoy vim :)
