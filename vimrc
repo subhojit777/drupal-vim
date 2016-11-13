@@ -31,6 +31,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
+Plugin 'digitaltoad/vim-pug'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -106,8 +107,8 @@ else
 endif
 
 " Custom key mappings
-nmap <F8> :TagbarToggle<CR>
-nmap <F7> :NERDTreeToggle<CR>
+nmap <leader>tt :TagbarToggle<CR>
+nmap <leader>ntt :NERDTreeToggle<CR>
 
 " Move tabs with alt + left|right
 nnoremap <silent> <A-Left> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
@@ -123,7 +124,7 @@ let g:ctrlp_custom_ignore = {
   \ }
 let g:ctrlp_mruf_case_sensitive = 0
 " ignore files in .gitignore
-"let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_max_files = 0
 
@@ -185,12 +186,23 @@ let g:airline_symbols.branch = '⎇'
 let g:airline_symbols.paste = 'ρ'
 
 " vdebug settings
-" Make sure xdebug is configured to port number 9001
+" If you are using VM, make sure you have the following settings:
+" - If your VM file path is in sync with your host path, you have to configure
+" 	`path_maps` like this:
+" 		'path_maps': {
+" 			'<HOST_PATH_1>': '<VM_PATH_1>',
+" 			'<HOST_PATH_2>': '<VM_PATH_2>',
+" 		}
+" Thanks to https://github.com/AshishThakur
+" -----------------------------------------------------------------------------
 let g:vdebug_options= {
-\    "port" : 9001,
-\    "server": "localhost",
-\    "debug_file_level" : 2,
-\    "debug_file" : '/tmp/vdebug.log',
+\	'break_on_open': 1,
+\	'debug_file_level': 2,
+\	'debug_file': '/tmp/vdebug.log',
+\	'path_maps': {
+\		'/var/www/drupalvm': '/var/www/drupalvm',
+\	},
+\	'idekey': 'vdebug',
 \}
 nnoremap <F8>  :BreakpointRemove *<CR>
 inoremap <F8> <Esc>:BreakpointRemove *<CR>
@@ -227,32 +239,34 @@ if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 
   " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
+  let g:ctrlp_use_caching = 1
 endif
 " bind K to grep word under cursor
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 " Default vim settings
-set mouse=a			" Enable mouse
-set number			" Show line numbers
-set showmatch			" Show matching brackets
-set smartcase			" Do smart case matching
-set smarttab			" Enable smarttab
-set incsearch			" Incremental search
-set noswapfile			" Do not create swp file
-set cursorline			" highlight current line
-set laststatus=2		" Airline
-set backspace=indent,eol,start 	" Backspace for dummies
-set ignorecase 			" Case insensitive search
-set smartcase 			" Case sensitive when uc present
-set wildmenu 			" Show list instead of just completing
-set wildmode=list:longest,full 	" Command <Tab> completion, list matches, then longest common part, then all.
-set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic whitespace
-set fileformat=unix		" UNIX fileformat
-set endofline			" Newline at the end of file
-set autoread			" Autoreload changes to file
-set noundofile			" Do not create undo files
-set undodir=~/vimtmp		" Store undo files in a directory
+set mouse=a																			" Enable mouse
+set number																			" Show line numbers
+set showmatch																		" Show matching brackets
+set smartcase																		" Do smart case matching
+set smarttab																		" Enable smarttab
+set incsearch																		" Incremental search
+set noswapfile																	" Do not create swp file
+set cursorline																	" highlight current line
+set laststatus=2																" Airline
+set backspace=indent,eol,start 									" Backspace for dummies
+set ignorecase 																	" Case insensitive search
+set smartcase 																	" Case sensitive when uc present
+set wildmenu 																		" Show list instead of just completing
+set wildmode=list:longest,full									" Command <Tab> completion, list matches, then longest common part, then all.
+set listchars=tab:›\ ,trail:•,extends:#,nbsp:.	" Highlight problematic whitespace
+set fileformat=unix															" UNIX fileformat
+set endofline																		" Newline at the end of file
+set autoread																		" Autoreload changes to file
+set noundofile																	" Do not create undo files
+set undodir=~/vimtmp														" Store undo files in a directory
+set tabstop=2																		" Two space indentation
+set shiftwidth=2																" Number of space during (auto)indent
 
 " End of vimrc-install additions.
 source $VIMRUNTIME/vimrc_example.vim
