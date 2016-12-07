@@ -32,6 +32,7 @@ Plugin 'jiangmiao/auto-pairs'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
 Plugin 'digitaltoad/vim-pug'
+Plugin 'embear/vim-localvimrc'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -243,6 +244,9 @@ if executable('ag')
 endif
 " bind K to grep word under cursor
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+
+" embear/vim-localvimrc settings
+let g:localvimrc_ask=0
 
 " Default vim settings
 set mouse=a																			" Enable mouse
