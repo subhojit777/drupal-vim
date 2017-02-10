@@ -191,8 +191,8 @@ let g:airline_symbols.paste = 'ρ'
 " - If your VM file path is in sync with your host path, you have to configure
 " 	`path_maps` like this:
 " 		'path_maps': {
-" 			'<HOST_PATH_1>': '<VM_PATH_1>',
-" 			'<HOST_PATH_2>': '<VM_PATH_2>',
+" 			'<VM_PATH_1>': '<HOST_PATH_1>',
+" 			'<VM_PATH_2>': '<HOST_PATH_2>',
 " 		}
 " Thanks to https://github.com/AshishThakur
 " -----------------------------------------------------------------------------
