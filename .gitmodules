@@ -70,3 +70,15 @@
 [submodule "bundle/ale"]
 	path = bundle/ale
 	url = https://github.com/w0rp/ale.git
+[submodule "bundle/ultisnips"]
+	path = bundle/ultisnips
+	url = https://github.com/SirVer/ultisnips.git
+[submodule "bundle/sniphpets"]
+	path = bundle/sniphpets
+	url = https://github.com/sniphpets/sniphpets
+[submodule "bundle/sniphpets-common"]
+	path = bundle/sniphpets-common
+	url = https://github.com/sniphpets/sniphpets-common
+[submodule "bundle/sniphpets-phpunit"]
+	path = bundle/sniphpets-phpunit
+	url = https://github.com/sniphpets/sniphpets-phpunit

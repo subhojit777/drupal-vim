@@ -10,11 +10,12 @@ Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'Shougo/neocomplete.vim'
 Plugin 'bling/vim-airline'
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'tomtom/tlib_vim'
-Plugin 'garbas/vim-snipmate'
 Plugin 'technosophos/drupal-snippets'
+Plugin 'sirver/ultisnips'
 Plugin 'honza/vim-snippets'
+Plugin 'sniphpets/sniphpets'
+Plugin 'sniphpets/sniphpets-common'
+Plugin 'sniphpets/sniphpets-phpunit'
 Plugin 'dahu/SearchParty'
 Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-session'
@@ -263,6 +264,11 @@ let g:ale_linters = {
 			\}
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
+
+" sirver/ultisnips settings
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " Default vim settings
 set mouse=a																			" Enable mouse
