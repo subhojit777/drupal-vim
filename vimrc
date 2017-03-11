@@ -33,20 +33,24 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
 Plugin 'digitaltoad/vim-pug'
 Plugin 'embear/vim-localvimrc'
+Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'mileszs/ack.vim'
+Plugin 'w0rp/ale'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
 
 if has("autocmd")
-  "Drupal *.module and *.install files.
-  augroup filetypedetect
-    au! BufRead,BufNewFile *.module setfiletype php
-    au! BufRead,BufNewFile *.install setfiletype php
-    au! BufRead,BufNewFile *.test setfiletype php
-    au! BufRead,BufNewFile *.inc setfiletype php
-    au! BufRead,BufNewFile *.profile setfiletype php
-    au! BufRead,BufNewFile *.view setfiletype php
-  augroup END
+	"Drupal *.module and *.install files.
+	augroup filetypedetect
+		au! BufRead,BufNewFile *.module setfiletype php
+		au! BufRead,BufNewFile *.install setfiletype php
+		au! BufRead,BufNewFile *.test setfiletype php
+		au! BufRead,BufNewFile *.inc setfiletype php
+		au! BufRead,BufNewFile *.profile setfiletype php
+		au! BufRead,BufNewFile *.view setfiletype php
+		au! BufRead,BufNewFile *.theme setfiletype php
+	augroup END
 endif
 
 " tab navigation like firefox
@@ -102,14 +106,14 @@ vmap <S-tab> :<<CR>gv
 
 " color column
 if exists('+colorcolumn')
-  set colorcolumn=80
+	set colorcolumn=80
 else
-  au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+	au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
 endif
 
 " Custom key mappings
 nmap <leader>tt :TagbarToggle<CR>
-nmap <leader>ntt :NERDTreeToggle<CR>
+nmap <leader>ntt :NERDTreeMirrorToggle<CR>
 
 " Move tabs with alt + left|right
 nnoremap <silent> <A-Left> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
@@ -120,9 +124,9 @@ let g:ctrlp_by_filename = 1
 let g:ctrlp_match_window = 'bottom,order:ttb,min:1,max:20,results:20'
 let g:ctrlp_open_new_file = 't'
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\v\.(jpg|jpeg|png|gif)$',
-  \ }
+			\ 'dir':  '\v[\/]\.(git|hg|svn)$',
+			\ 'file': '\v\.(jpg|jpeg|png|gif)$',
+			\ }
 let g:ctrlp_mruf_case_sensitive = 0
 " ignore files in .gitignore
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
@@ -147,7 +151,7 @@ autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
 
 " Enable heavy omni completion.
 if !exists('g:neocomplete#sources#omni#input_patterns')
-  let g:neocomplete#sources#omni#input_patterns = {}
+	let g:neocomplete#sources#omni#input_patterns = {}
 endif
 let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
 
@@ -178,7 +182,7 @@ let g:airline#extensions#whitespace#enabled = 1
 let g:airline#extensions#whitespace#symbol = '!'
 let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing' ]
 if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
+	let g:airline_symbols = {}
 endif
 let g:airline_left_sep = '▶'
 let g:airline_right_sep = '◀'
@@ -197,13 +201,13 @@ let g:airline_symbols.paste = 'ρ'
 " Thanks to https://github.com/AshishThakur
 " -----------------------------------------------------------------------------
 let g:vdebug_options= {
-\	'break_on_open': 1,
-\	'debug_file_level': 2,
-\	'debug_file': '/tmp/vdebug.log',
-\	'path_maps': {
-\		'/var/www/drupalvm': '/var/www/drupalvm',
-\	},
-\	'idekey': 'vdebug',
+\      'break_on_open': 1,
+\      'debug_file_level': 2,
+\      'debug_file': '/tmp/vdebug.log',
+\      'path_maps': {
+\              '/var/www/drupalvm': '/var/www/drupalvm',
+\      },
+\      'idekey': 'vdebug',
 \}
 nnoremap <F8>  :BreakpointRemove *<CR>
 inoremap <F8> <Esc>:BreakpointRemove *<CR>
@@ -220,33 +224,45 @@ autocmd BufWritePre * :%s/\s\+$//e
 " MatchTagAlways settings
 " enable match tags in php template files
 let g:mta_filetypes = {
-    \ 'html' : 1,
-    \ 'xhtml' : 1,
-    \ 'xml' : 1,
-    \ 'jinja' : 1,
-    \ 'php' : 1,
-    \}
+			\ 'html' : 1,
+			\ 'xhtml' : 1,
+			\ 'xml' : 1,
+			\ 'jinja' : 1,
+			\ 'php' : 1,
+			\}
 
-" Syntastic settings
-"let g:syntastic_php_phpcs_args="--standard=Drupal --extensions=php,module,inc,install,test,profile,theme"
-
-" The Silver Searcher
-" From https://robots.thoughtbot.com/faster-grepping-in-vim
+" The Silver Searcher + mileszs/ack.vim
 if executable('ag')
-  " Use ag over grep
-  set grepprg=ag\ --nogroup\ --nocolor
-
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-
-  " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 1
+	let g:ackprg = 'ag --vimgrep'
 endif
+
 " bind K to grep word under cursor
-nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+nnoremap K :Ack! "\b<C-R><C-W>\b"<CR>:cw<CR>
+
+" mileszs/ack.vim settings
+cnoreabbrev Ack Ack!
+cnoreabbrev ack Ack!
+nnoremap <Leader>a :Ack!<Space>
 
 " embear/vim-localvimrc settings
 let g:localvimrc_ask=0
+
+" jistr/vim-nerdtree-tabs settings
+let g:nerdtree_tabs_open_on_gui_startup=0
+
+" w0rp/ale settings
+let g:ale_lint_on_save = 1
+let g:ale_lint_on_text_changed = 0
+let g:ale_lint_on_enter = 0
+let g:ale_open_list = 1
+let g:ale_set_loclist = 0
+let g:ale_set_quickfix = 1
+let g:ale_php_phpcs_standard = 'Drupal' " See https://www.drupal.org/node/1419988
+let g:ale_linters = {
+			\   'php': ['php', 'phpcs'],
+			\}
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 " Default vim settings
 set mouse=a																			" Enable mouse
@@ -271,6 +287,7 @@ set noundofile																	" Do not create undo files
 set undodir=~/vimtmp														" Store undo files in a directory
 set tabstop=2																		" Two space indentation
 set shiftwidth=2																" Number of space during (auto)indent
+set guifont=Monaco:h16													" Default font settings
 
 " End of vimrc-install additions.
 source $VIMRUNTIME/vimrc_example.vim
