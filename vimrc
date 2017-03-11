@@ -41,18 +41,54 @@ Plugin 'w0rp/ale'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
-if has("autocmd")
-	"Drupal *.module and *.install files.
-	augroup filetypedetect
-		au! BufRead,BufNewFile *.module setfiletype php
-		au! BufRead,BufNewFile *.install setfiletype php
-		au! BufRead,BufNewFile *.test setfiletype php
-		au! BufRead,BufNewFile *.inc setfiletype php
-		au! BufRead,BufNewFile *.profile setfiletype php
-		au! BufRead,BufNewFile *.view setfiletype php
-		au! BufRead,BufNewFile *.theme setfiletype php
-	augroup END
-endif
+" ---------------------------
+" Default Vim settings begin
+" ---------------------------
+" Vim settings
+set mouse=a                                     " Enable mouse
+set number                                      " Show line numbers
+set showmatch                                   " Show matching brackets
+set smartcase                                   " Do smart case matching
+set smarttab                                    " Enable smarttab
+set incsearch                                   " Incremental search
+set noswapfile                                  " Do not create swp file
+set cursorline                                  " highlight current line
+set laststatus=2                                " Airline
+set backspace=indent,eol,start                  " Backspace for dummies
+set ignorecase                                  " Case insensitive search
+set smartcase                                   " Case sensitive when uc present
+set wildmenu                                    " Show list instead of just completing
+set wildmode=list:longest,full                  " Command <Tab> completion, list matches, then longest common part, then all.
+set listchars=tab:›\ ,trail:•,extends:#,nbsp:.  " Highlight problematic whitespace
+set fileformat=unix                             " UNIX fileformat
+set endofline                                   " Newline at the end of file
+set autoread                                    " Autoreload changes to file
+set noundofile                                  " Do not create undo files
+set undodir=~/vimtmp                            " Store undo files in a directory
+set tabstop=2                                   " Two space indentation
+set shiftwidth=2                                " Number of space during (auto)indent
+set expandtab                                   " Use spaces for tabs
+set guifont=Monaco:h16                          " Default font settings
+
+" Drupal files should be identified as PHP files.
+augroup filetypedetect
+  au! BufRead,BufNewFile *.module setfiletype php
+  au! BufRead,BufNewFile *.install setfiletype php
+  au! BufRead,BufNewFile *.test setfiletype php
+  au! BufRead,BufNewFile *.inc setfiletype php
+  au! BufRead,BufNewFile *.profile setfiletype php
+  au! BufRead,BufNewFile *.view setfiletype php
+  au! BufRead,BufNewFile *.theme setfiletype php
+augroup END
+
+" Make sure QuickFix, Tagbar, Nerdtree is closed before exiting Vim
+autocmd BufWinLeave * :tabdo ccl
+
+" markdown syntax highlighting
+au BufRead,BufNewFile *.md set filetype=markdown
+
+" remove trailing whitespace on save
+autocmd BufWritePre * :%s/\s\+$//e
 
 " tab navigation like firefox
 nnoremap <C-S-tab> :tabprevious<CR>
@@ -107,36 +143,53 @@ vmap <S-tab> :<<CR>gv
 
 " color column
 if exists('+colorcolumn')
-	set colorcolumn=80
+  set colorcolumn=80
 else
-	au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+  au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
 endif
-
-" Custom key mappings
-nmap <leader>tt :TagbarToggle<CR>
-nmap <leader>ntt :NERDTreeMirrorToggle<CR>
 
 " Move tabs with alt + left|right
 nnoremap <silent> <A-Left> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
 nnoremap <silent> <A-Right> :execute 'silent! tabmove ' . tabpagenr()<CR>
 
-" ctrlp custom settings
+" Store backups in separate directory
+" Make sure you do `mkdir ~/vimtmp` before using this setting
+set backupdir=~/vimtmp
+
+" Instead of reverting the cursor to the last position in the buffer, we
+" set it to the first line when editing a git commit message
+au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
+
+" ---------------------------
+" Default Vim settings end
+" ---------------------------
+
+" ---------------------------
+" Plugin settings begin
+" ---------------------------
+
+" Tagbar settings
+nmap <leader>tt :TagbarToggle<CR>
+autocmd BufWinLeave * :tabdo TagbarClose
+
+" nerdtree/vim-nerdtree-tabs settings
+let g:nerdtree_tabs_open_on_gui_startup=0
+nmap <leader>ntt :NERDTreeMirrorToggle<CR>
+autocmd BufWinLeave * :tabdo NERDTreeClose
+
+" ctrlp settings
 let g:ctrlp_by_filename = 1
 let g:ctrlp_match_window = 'bottom,order:ttb,min:1,max:20,results:20'
 let g:ctrlp_open_new_file = 't'
 let g:ctrlp_custom_ignore = {
-			\ 'dir':  '\v[\/]\.(git|hg|svn)$',
-			\ 'file': '\v\.(jpg|jpeg|png|gif)$',
-			\ }
+      \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+      \ 'file': '\v\.(jpg|jpeg|png|gif)$',
+      \ }
 let g:ctrlp_mruf_case_sensitive = 0
 " ignore files in .gitignore
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_max_files = 0
-
-" Store backups in separate directory
-" Make sure you do `mkdir ~/vimtmp` before using this setting
-set backupdir=~/vimtmp
 
 " Use neocomplete.
 let g:neocomplete#enable_at_startup = 1
@@ -152,7 +205,7 @@ autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
 
 " Enable heavy omni completion.
 if !exists('g:neocomplete#sources#omni#input_patterns')
-	let g:neocomplete#sources#omni#input_patterns = {}
+  let g:neocomplete#sources#omni#input_patterns = {}
 endif
 let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
 
@@ -166,16 +219,13 @@ inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
 inoremap <expr><C-y>  neocomplete#close_popup()
 inoremap <expr><C-e>  neocomplete#cancel_popup()
 
-" Instead of reverting the cursor to the last position in the buffer, we
-" set it to the first line when editing a git commit message
-au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
-
 " vim-session settings
-let g:session_directory = "~/.vimsessions"	" Store vim sessions in another location. Make sure you do `mkdir ~/.vimsessions` before using this setting
-let g:session_default_to_last = 1		" Restore last session
-let g:session_autoload = 'yes'			" Restore last session
-let g:session_autosave = 'yes'			" Session will be saved manually
-let g:session_default_overwrite = 0		" Do not override default session
+let g:session_directory = "~/.vimsessions"  " Store vim sessions in another location. Make sure you do `mkdir ~/.vimsessions` before using this setting
+let g:session_default_to_last = 1           " Restore last session
+let g:session_autoload = 'yes'              " Restore last session
+let g:session_autosave = 'yes'              " Session will be saved manually
+let g:session_default_overwrite = 0         " Do not override default session
+nnoremap <C-A-p> :OpenSession<CR>           " sublime text like project switch
 
 " vim-airline settings
 let g:airline#extensions#branch#enabled = 1
@@ -183,7 +233,7 @@ let g:airline#extensions#whitespace#enabled = 1
 let g:airline#extensions#whitespace#symbol = '!'
 let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing' ]
 if !exists('g:airline_symbols')
-	let g:airline_symbols = {}
+  let g:airline_symbols = {}
 endif
 let g:airline_left_sep = '▶'
 let g:airline_right_sep = '◀'
@@ -213,45 +263,31 @@ let g:vdebug_options= {
 nnoremap <F8>  :BreakpointRemove *<CR>
 inoremap <F8> <Esc>:BreakpointRemove *<CR>
 
-" markdown syntax highlighting
-au BufRead,BufNewFile *.md set filetype=markdown
-
-" sublime text like project switch
-nnoremap <C-A-p> :OpenSession<CR>
-
-" remove trailing whitespace on save
-autocmd BufWritePre * :%s/\s\+$//e
-
 " MatchTagAlways settings
 " enable match tags in php template files
 let g:mta_filetypes = {
-			\ 'html' : 1,
-			\ 'xhtml' : 1,
-			\ 'xml' : 1,
-			\ 'jinja' : 1,
-			\ 'php' : 1,
-			\}
+      \ 'html' : 1,
+      \ 'xhtml' : 1,
+      \ 'xml' : 1,
+      \ 'jinja' : 1,
+      \ 'php' : 1,
+      \}
 
-" The Silver Searcher + mileszs/ack.vim
-if executable('ag')
-	let g:ackprg = 'ag --vimgrep'
-endif
-
-" bind K to grep word under cursor
-nnoremap K :Ack! "\b<C-R><C-W>\b"<CR>:cw<CR>
-
-" mileszs/ack.vim settings
+" ack.vim settings
 cnoreabbrev Ack Ack!
 cnoreabbrev ack Ack!
 nnoremap <Leader>a :Ack!<Space>
+nnoremap K :Ack! "\b<C-R><C-W>\b"<CR>:cw<CR>	" bind K to grep word under cursor
+
+" The Silver Searcher + mileszs/ack.vim
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
 
 " embear/vim-localvimrc settings
 let g:localvimrc_ask=0
 
-" jistr/vim-nerdtree-tabs settings
-let g:nerdtree_tabs_open_on_gui_startup=0
-
-" w0rp/ale settings
+" ale settings
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_text_changed = 0
 let g:ale_lint_on_enter = 0
@@ -260,40 +296,19 @@ let g:ale_set_loclist = 0
 let g:ale_set_quickfix = 1
 let g:ale_php_phpcs_standard = 'Drupal' " See https://www.drupal.org/node/1419988
 let g:ale_linters = {
-			\   'php': ['php', 'phpcs'],
-			\}
+      \   'php': ['php', 'phpcs'],
+      \}
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
-" sirver/ultisnips settings
+" ultisnips settings
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
-" Default vim settings
-set mouse=a																			" Enable mouse
-set number																			" Show line numbers
-set showmatch																		" Show matching brackets
-set smartcase																		" Do smart case matching
-set smarttab																		" Enable smarttab
-set incsearch																		" Incremental search
-set noswapfile																	" Do not create swp file
-set cursorline																	" highlight current line
-set laststatus=2																" Airline
-set backspace=indent,eol,start 									" Backspace for dummies
-set ignorecase 																	" Case insensitive search
-set smartcase 																	" Case sensitive when uc present
-set wildmenu 																		" Show list instead of just completing
-set wildmode=list:longest,full									" Command <Tab> completion, list matches, then longest common part, then all.
-set listchars=tab:›\ ,trail:•,extends:#,nbsp:.	" Highlight problematic whitespace
-set fileformat=unix															" UNIX fileformat
-set endofline																		" Newline at the end of file
-set autoread																		" Autoreload changes to file
-set noundofile																	" Do not create undo files
-set undodir=~/vimtmp														" Store undo files in a directory
-set tabstop=2																		" Two space indentation
-set shiftwidth=2																" Number of space during (auto)indent
-set guifont=Monaco:h16													" Default font settings
+" ---------------------------
+" Plugin settings end
+" ---------------------------
 
 " End of vimrc-install additions.
 source $VIMRUNTIME/vimrc_example.vim
