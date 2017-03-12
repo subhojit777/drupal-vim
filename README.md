@@ -1,15 +1,15 @@
 # Vim plugins and settings for Drupal development
 
+Vim plugins and settings that will ease writing Drupal code in Vim. Other than
+Drupal, these settings will also help you writing **PHP** and **JavaScript**.
+The settings will also work in graphical Vim (recommended).
+
 - [Installation](#installation)
 - [Features](#features)
   - [Autocomplete](#autocomplete)
   - [Asynchronous syntax checker using](#asynchronous-syntax-checker-using-w0rpale)
   - [List of functions and variables](#list-of-functions-and-variables)
   - [View files and directories in project docroot](#view-files-and-directories-in-project-docroot)
-
-Vim plugins and settings that will ease writing Drupal code in Vim. Other than
-Drupal, these settings will also help you writing **PHP** and **JavaScript**.
-The settings will also work in graphical Vim (recommended).
 
 ## Installation
 ```
