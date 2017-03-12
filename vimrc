@@ -81,9 +81,6 @@ augroup filetypedetect
   au! BufRead,BufNewFile *.theme setfiletype php
 augroup END
 
-" Make sure QuickFix, Tagbar, Nerdtree is closed before exiting Vim
-autocmd BufWinLeave * :tabdo ccl
-
 " markdown syntax highlighting
 au BufRead,BufNewFile *.md set filetype=markdown
 
@@ -170,12 +167,10 @@ au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
 
 " Tagbar settings
 nmap <leader>tt :TagbarToggle<CR>
-autocmd BufWinLeave * :tabdo TagbarClose
 
 " nerdtree/vim-nerdtree-tabs settings
 let g:nerdtree_tabs_open_on_gui_startup=0
 nmap <leader>ntt :NERDTreeMirrorToggle<CR>
-autocmd BufWinLeave * :tabdo NERDTreeClose
 
 " ctrlp settings
 let g:ctrlp_by_filename = 1
