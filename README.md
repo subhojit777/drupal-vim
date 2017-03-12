@@ -1,10 +1,17 @@
 # Vim plugins and settings for Drupal development
 
-Just another set of vim plugins and settings that will ease writing Drupal code
-in vim. The settings will work in graphical vim
-([GVim](https://apps.ubuntu.com/cat/applications/vim-gnome/)) as well and I recommend using GVim.
+- [Installation](#installation)
+- [Features](#features)
+  - [Autocomplete](#autocomplete)
+  - [Asynchronous syntax checker using](#asynchronous-syntax-checker-using-w0rpale)
+  - [List of functions and variables](#list-of-functions-and-variables)
+  - [View files and directories in project docroot](#view-files-and-directories-in-project-docroot)
 
-#### Installation
+Vim plugins and settings that will ease writing Drupal code in Vim. Other than
+Drupal, these settings will also help you writing **PHP** and **JavaScript**.
+The settings will also work in graphical Vim (recommended).
+
+## Installation
 ```
 1. cd
 2. mv ~/.vim ~/.vim-bak // If you have vim settings. Else, proceed to next step
@@ -15,10 +22,39 @@ in vim. The settings will work in graphical vim
 7. mkdir ~/.vimsessions
 8. mkdir ~/vimtmp
 9. `sudo apt-get install exuberant-ctags` // Install exuberant-ctags on Ubuntu/Debian
-10. `brew install ctags` // Install exuberant-ctags on OSX
+10. `brew install ctags` // Install exuberant-ctags on OSX (Make sure you have [Homebrew](https://brew.sh/) installed)
 11. vim +BundleInstall +qall
 ```
 
 And you are good to go! Enjoy vim :)
 
-**P.S. Please create issues [here](https://github.com/subhojit777/drupal-vim/issues/new) if you are having any problem during installation.**
+## Features
+### Autocomplete
+![Autocomplete variables](images/feature-1.png "Autocomplete variables")
+
+![Autocomplete syntax](images/feature-2.png "Autocomplete syntax")
+
+![Autocomplete syntax (after pressing tab key)](images/feature-3.png "Autocomplete syntax (press `tab`)")
+
+### Asynchronous syntax checker using [`w0rp/ale`](https://github.com/w0rp/ale)
+![Asynchronous syntax checker](images/feature-4.png "Triggered on file save")
+
+This is *triggered* on *file save*.
+
+### List of functions and variables
+![Functions and variables](images/feature-5.png "Trigger it using `<leader>tt`")
+
+Trigger it using *`<leader>tt`*.
+
+### View files and directories in project docroot
+![Files and directories](images/feature-6.png "Trigger it using `<leader>ntt`")
+
+Trigger it using *`<leader>ntt`*.
+
+This also uses [`jistr/vim-nerdtree-tabs`](https://github.com/jistr/vim-nerdtree-tabs), so the state is maintained across tabs.
+
+And many **[more features](http://subhojit777.in/use-vim-as-ide-for-drupal-development)**.
+
+**Create issues [here](https://github.com/subhojit777/drupal-vim/issues/new) if you are having any problem during installation.**
+
+**Pull requests are welcome if you have any new features in mind :)**
