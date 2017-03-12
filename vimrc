@@ -68,6 +68,8 @@ set undodir=~/vimtmp                            " Store undo files in a director
 set tabstop=2                                   " Two space indentation
 set shiftwidth=2                                " Number of space during (auto)indent
 set expandtab                                   " Use spaces for tabs
+set autoindent                                  " Copies indent from current line to next line
+set smartindent                                 " Copies indent from current line to next line
 set guifont=Monaco:h16                          " Default font settings
 
 " Drupal files should be identified as PHP files.
