@@ -26,7 +26,7 @@ The settings will also work in graphical Vim (recommended).
 11. vim +BundleInstall +qall
 ```
 
-And you are good to go! Enjoy vim :)
+And you are good to go!
 
 ## Features
 ### Autocomplete
@@ -34,7 +34,11 @@ And you are good to go! Enjoy vim :)
 
 ![Autocomplete syntax](images/feature-2.png "Autocomplete syntax")
 
+*Navigate* through the list using `<C-n>` (next), `<C-p>` (previous).
+
 ![Autocomplete syntax (after pressing tab key)](images/feature-3.png "Autocomplete syntax (press `tab`)")
+
+*Expand* it by pressing `tab` key.
 
 ### Asynchronous syntax checker using [`w0rp/ale`](https://github.com/w0rp/ale)
 ![Asynchronous syntax checker](images/feature-4.png "Triggered on file save")
@@ -44,17 +48,19 @@ This is *triggered* on *file save*.
 ### List of functions and variables
 ![Functions and variables](images/feature-5.png "Trigger it using `<leader>tt`")
 
-Trigger it using *`<leader>tt`*.
+*Trigger* it using *`<leader>tt`*.
 
 ### View files and directories in project docroot
 ![Files and directories](images/feature-6.png "Trigger it using `<leader>ntt`")
 
-Trigger it using *`<leader>ntt`*.
+*Trigger* it using *`<leader>ntt`*.
 
 This also uses [`jistr/vim-nerdtree-tabs`](https://github.com/jistr/vim-nerdtree-tabs), so the state is maintained across tabs.
 
-And many **[more features](http://subhojit777.in/use-vim-as-ide-for-drupal-development)**.
+And many **[other features](http://subhojit777.in/use-vim-as-ide-for-drupal-development)**.
 
-**Create issues [here](https://github.com/subhojit777/drupal-vim/issues/new) if you are having any problem during installation.**
+**Feel free to create issues [here](https://github.com/subhojit777/drupal-vim/issues/new) if you are having problem during the setup.**
 
-**Pull requests are welcome if you have any new features in mind :)**
+**Pull requests are welcome for bugs/new features :)**
+
+Thanks for flying Vim :)
