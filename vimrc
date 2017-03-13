@@ -66,7 +66,6 @@ set autoread                                    " Autoreload changes to file
 set noundofile                                  " Do not create undo files
 set undodir=~/vimtmp                            " Store undo files in a directory
 set tabstop=2                                   " Two space indentation
-set shiftwidth=2                                " Number of space during (auto)indent
 set expandtab                                   " Use spaces for tabs
 set autoindent                                  " Copies indent from current line to next line
 set smartindent                                 " Copies indent from current line to next line
