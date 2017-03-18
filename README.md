@@ -36,9 +36,9 @@ And you are good to go!
 
 *Navigate* through the list using `<C-n>` (next), `<C-p>` (previous).
 
-![Autocomplete syntax (after pressing tab key)](images/feature-3.png "Autocomplete syntax (press `tab`)")
+![Autocomplete syntax (after pressing ctrl-k)](images/feature-3.png "Autocomplete syntax (press `ctrl-k`)")
 
-*Expand* it by pressing `tab` key.
+*Expand* it by pressing `ctrl-k` key.
 
 ### Asynchronous syntax checker using [`w0rp/ale`](https://github.com/w0rp/ale)
 ![Asynchronous syntax checker](images/feature-4.png "Triggered on file save")
