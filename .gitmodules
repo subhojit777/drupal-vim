@@ -22,9 +22,6 @@
 [submodule "bundle/vim-snippets"]
 	path = bundle/vim-snippets
 	url = git@github.com:honza/vim-snippets.git
-[submodule "bundle/vim-twig"]
-	path = bundle/vim-twig
-	url = git@github.com:evidens/vim-twig
 [submodule "bundle/vim-haml"]
 	path = bundle/vim-haml
 	url = git@github.com:tpope/vim-haml
@@ -82,3 +79,6 @@
 [submodule "bundle/sniphpets-phpunit"]
 	path = bundle/sniphpets-phpunit
 	url = https://github.com/sniphpets/sniphpets-phpunit
+[submodule "bundle/vim-twig"]
+	path = bundle/vim-twig
+	url = https://github.com/lumiliet/vim-twig.git
