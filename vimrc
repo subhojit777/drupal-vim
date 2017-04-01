@@ -72,8 +72,8 @@ set autoindent                                  " Copies indent from current lin
 set smartindent                                 " Copies indent from current line to next line
 set guifont=Monaco:h16                          " Default font settings
 
-" Drupal files should be identified as PHP files.
 augroup filetypedetect
+  " Drupal files should be identified as PHP files.
   au! BufRead,BufNewFile *.module setfiletype php
   au! BufRead,BufNewFile *.install setfiletype php
   au! BufRead,BufNewFile *.test setfiletype php
@@ -81,13 +81,15 @@ augroup filetypedetect
   au! BufRead,BufNewFile *.profile setfiletype php
   au! BufRead,BufNewFile *.view setfiletype php
   au! BufRead,BufNewFile *.theme setfiletype php
+
+  " markdown syntax highlighting
+  au! BufRead,BufNewFile *.md set filetype=markdown
 augroup END
 
-" markdown syntax highlighting
-au BufRead,BufNewFile *.md set filetype=markdown
-
 " remove trailing whitespace on save
-autocmd BufWritePre * :%s/\s\+$//e
+augroup removetrailingspace
+  au! BufWritePre * :%s/\s\+$//e
+augroup END
 
 " tab navigation like firefox
 nnoremap <C-S-tab> :tabprevious<CR>
@@ -144,7 +146,7 @@ vnoremap <S-tab> :<<CR>gv
 if exists('+colorcolumn')
   set colorcolumn=80
 else
-  au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+  au! BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
 endif
 
 " Move tabs with alt + left|right
@@ -157,7 +159,7 @@ set backupdir=~/vimtmp
 
 " Instead of reverting the cursor to the last position in the buffer, we
 " set it to the first line when editing a git commit message
-au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
+au! FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
 
 " ---------------------------
 " Default Vim settings end
@@ -195,10 +197,12 @@ let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_auto_select = 1
 
 " Enable omni completion.
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
+augroup onmicompletion
+  au! FileType css setlocal omnifunc=csscomplete#CompleteCSS
+  au! FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+  au! FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+  au! FileType php setlocal omnifunc=phpcomplete#CompletePHP
+augroup END
 
 " Enable heavy omni completion.
 if !exists('g:neocomplete#sources#omni#input_patterns')
@@ -305,7 +309,9 @@ let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " Default colorscheme
-colorscheme solarized
+augroup colorscheme
+  au! BufWinEnter * :colorscheme solarized
+augroup END
 
 " ---------------------------
 " Plugin settings end
