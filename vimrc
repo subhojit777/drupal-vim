@@ -135,10 +135,10 @@ inoremap <D-8>     <Esc>8gt
 inoremap <D-9>     <Esc>:tablast<CR>
 
 " easy indentation
-nmap <tab> a<C-t><Esc>
-nmap <S-tab> a<C-d><Esc>
-vmap <tab> :><CR>gv
-vmap <S-tab> :<<CR>gv
+nnoremap <tab> a<C-t><Esc>
+nnoremap <S-tab> a<C-d><Esc>
+vnoremap <tab> :><CR>gv
+vnoremap <S-tab> :<<CR>gv
 
 " color column
 if exists('+colorcolumn')
@@ -149,7 +149,7 @@ endif
 
 " Move tabs with alt + left|right
 nnoremap <silent> <A-Left> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
-nnoremap <silent> <A-Right> :execute 'silent! tabmove ' . tabpagenr()<CR>
+nnoremap <silent> <A-Right> :execute 'silent! tabmove ' . (tabpagenr()+1)<CR>
 
 " Store backups in separate directory
 " Make sure you do `mkdir ~/vimtmp` before using this setting
@@ -168,11 +168,11 @@ au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
 " ---------------------------
 
 " Tagbar settings
-nmap <leader>tt :TagbarToggle<CR>
+nnoremap <leader>tt :TagbarToggle<CR>
 
 " nerdtree/vim-nerdtree-tabs settings
 let g:nerdtree_tabs_open_on_gui_startup=0
-nmap <leader>ntt :NERDTreeMirrorToggle<CR>
+nnoremap <leader>ntt :NERDTreeMirrorToggle<CR>
 
 " ctrlp settings
 let g:ctrlp_by_filename = 1
@@ -294,6 +294,7 @@ let g:ale_set_quickfix = 1
 let g:ale_php_phpcs_standard = 'Drupal' " See https://www.drupal.org/node/1419988
 let g:ale_linters = {
       \   'php': ['php', 'phpcs'],
+      \   'javascript': ['jshint'],
       \}
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
@@ -302,6 +303,9 @@ nmap <silent> <C-j> <Plug>(ale_next_wrap)
 let g:UltiSnipsExpandTrigger="<c-k>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" Default colorscheme
+colorscheme solarized
 
 " ---------------------------
 " Plugin settings end
