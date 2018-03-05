@@ -37,6 +37,7 @@ Plugin 'embear/vim-localvimrc'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'mileszs/ack.vim'
 Plugin 'w0rp/ale'
+Plugin 'ludovicchabant/vim-ctrlp-autoignore'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -71,6 +72,11 @@ set expandtab                                   " Use spaces for tabs
 set autoindent                                  " Copies indent from current line to next line
 set smartindent                                 " Copies indent from current line to next line
 set guifont=Monaco:h16                          " Default font settings
+set background=dark                             " Defaults to dark background
+
+" TODO figure out why we have to set this explicitly
+autocmd FileType * setlocal smartindent
+autocmd FileType * setlocal autoindent
 
 augroup filetypedetect
   " Drupal files should be identified as PHP files.
@@ -149,9 +155,10 @@ else
   au! BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
 endif
 
-" Move tabs with alt + left|right
-nnoremap <silent> <A-Left> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
-nnoremap <silent> <A-Right> :execute 'silent! tabmove ' . (tabpagenr()+1)<CR>
+" Move tabs with alt + left|right (Also makes sure that this keymap is set in
+" the end)
+autocmd VimEnter * nnoremap <silent> <A-Left> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
+autocmd VimEnter * nnoremap <silent> <A-Right> :execute 'silent! tabmove ' . (tabpagenr()+1)<CR>
 
 " Store backups in separate directory
 " Make sure you do `mkdir ~/vimtmp` before using this setting
@@ -160,6 +167,9 @@ set backupdir=~/vimtmp
 " Instead of reverting the cursor to the last position in the buffer, we
 " set it to the first line when editing a git commit message
 au! FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
+
+" Shortcut to open quickfix list
+nnoremap <leader>q :copen<CR>
 
 " ---------------------------
 " Default Vim settings end
@@ -175,6 +185,8 @@ nnoremap <leader>tt :TagbarToggle<CR>
 " nerdtree/vim-nerdtree-tabs settings
 let g:nerdtree_tabs_open_on_gui_startup=0
 nnoremap <leader>ntt :NERDTreeMirrorToggle<CR>
+nnoremap <leader>ntf :NERDTreeFind<CR>
+let NERDTreeShowHidden=1
 
 " ctrlp settings
 let g:ctrlp_by_filename = 1
@@ -189,6 +201,9 @@ let g:ctrlp_mruf_case_sensitive = 0
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_max_files = 0
+let g:ctrlp_switch_buffer = 'et'
+let g:ctrlp_regexp = 1
+let g:ctrlp_extensions = ['autoignore']
 
 " Use neocomplete.
 let g:neocomplete#enable_at_startup = 1
@@ -275,8 +290,8 @@ let g:mta_filetypes = {
       \}
 
 " ack.vim settings
-cnoreabbrev Ack Ack!
-cnoreabbrev ack Ack!
+let g:ackhighlight = 1
+let g:ack_default_options = " --ignore-dir=vendor"
 nnoremap <Leader>a :Ack!<Space>
 nnoremap K :Ack! "\b<C-R><C-W>\b"<CR>:cw<CR>	" bind K to grep word under cursor
 
@@ -298,7 +313,7 @@ let g:ale_set_quickfix = 1
 let g:ale_php_phpcs_standard = 'Drupal' " See https://www.drupal.org/node/1419988
 let g:ale_linters = {
       \   'php': ['php', 'phpcs'],
-      \   'javascript': ['jshint'],
+      \   'javascript': [],
       \}
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
@@ -312,6 +327,9 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 augroup colorscheme
   au! BufWinEnter * :colorscheme solarized
 augroup END
+
+" vim-fugitive settings
+cnoreabbrev git Git
 
 " ---------------------------
 " Plugin settings end
