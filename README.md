@@ -40,6 +40,14 @@ And you are good to go!
 
 *Expand* it by pressing `ctrl-k` key.
 
+#### Note
+[`Valloric/YouCompleteMe`](https://github.com/Valloric/YouCompleteMe), with [`shawncplus/phpcomplete.vim`](https://github.com/shawncplus/phpcomplete.vim) is now used for auto-complete. Therefore, you have to generate the tags.
+Run the following command from inside the root of your project.
+
+```sh
+ctags -R  --languages=php
+```
+
 ### Asynchronous syntax checker using [`w0rp/ale`](https://github.com/w0rp/ale)
 ![Asynchronous syntax checker](images/feature-4.png "Triggered on file save")
 
