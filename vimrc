@@ -1,3 +1,7 @@
+if has('python3')
+  silent! python3 1
+endif
+
 set nocompatible
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -8,7 +12,7 @@ Plugin 'gmarik/vundle'
 Plugin 'scrooloose/nerdtree'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'Shougo/neocomplete.vim'
+Plugin 'Valloric/YouCompleteMe'
 Plugin 'bling/vim-airline'
 Plugin 'technosophos/drupal-snippets'
 Plugin 'sirver/ultisnips'
@@ -184,7 +188,7 @@ nnoremap <leader>tt :TagbarToggle<CR>
 
 " nerdtree/vim-nerdtree-tabs settings
 let g:nerdtree_tabs_open_on_gui_startup=0
-nnoremap <leader>ntt :NERDTreeMirrorToggle<CR>
+nnoremap <leader>ntt :NERDTreeTabsToggle<CR>
 nnoremap <leader>ntf :NERDTreeFind<CR>
 let NERDTreeShowHidden=1
 
@@ -205,12 +209,6 @@ let g:ctrlp_switch_buffer = 'et'
 let g:ctrlp_regexp = 1
 let g:ctrlp_extensions = ['autoignore']
 
-" Use neocomplete.
-let g:neocomplete#enable_at_startup = 1
-
-" AutoComplPop like behavior.
-let g:neocomplete#enable_auto_select = 1
-
 " Enable omni completion.
 augroup onmicompletion
   au! FileType css setlocal omnifunc=csscomplete#CompleteCSS
@@ -218,22 +216,6 @@ augroup onmicompletion
   au! FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
   au! FileType php setlocal omnifunc=phpcomplete#CompletePHP
 augroup END
-
-" Enable heavy omni completion.
-if !exists('g:neocomplete#sources#omni#input_patterns')
-  let g:neocomplete#sources#omni#input_patterns = {}
-endif
-let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-
-" Plugin key-mappings.
-inoremap <expr><C-g>     neocomplete#undo_completion()
-inoremap <expr><C-l>     neocomplete#complete_common_string()
-
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><C-y>  neocomplete#close_popup()
-inoremap <expr><C-e>  neocomplete#cancel_popup()
 
 " vim-session settings
 let g:session_directory = "~/.vimsessions"  " Store vim sessions in another location. Make sure you do `mkdir ~/.vimsessions` before using this setting

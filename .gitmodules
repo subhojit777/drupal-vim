@@ -1,9 +1,6 @@
 [submodule "bundle/drupal-snippets"]
 	path = bundle/drupal-snippets
 	url = git@github.com:technosophos/drupal-snippets.git
-[submodule "bundle/neocomplete.vim"]
-	path = bundle/neocomplete.vim
-	url = git@github.com:Shougo/neocomplete.vim.git
 [submodule "bundle/nerdcommenter"]
 	path = bundle/nerdcommenter
 	url = git@github.com:scrooloose/nerdcommenter.git
@@ -82,3 +79,12 @@
 [submodule "bundle/vim-twig"]
 	path = bundle/vim-twig
 	url = https://github.com/lumiliet/vim-twig.git
+[submodule "bundle/vim-ctrlp-autoignore"]
+	path = bundle/vim-ctrlp-autoignore
+	url = https://github.com/ludovicchabant/vim-ctrlp-autoignore.git
+[submodule "bundle/YouCompleteMe"]
+	path = bundle/YouCompleteMe
+	url = https://github.com/Valloric/YouCompleteMe.git
+[submodule "bundle/phpcomplete.vim"]
+	path = bundle/phpcomplete.vim
+	url = https://github.com/shawncplus/phpcomplete.vim.git
