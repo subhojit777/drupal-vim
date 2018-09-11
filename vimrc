@@ -42,6 +42,7 @@ Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'mileszs/ack.vim'
 Plugin 'w0rp/ale'
 Plugin 'ludovicchabant/vim-ctrlp-autoignore'
+Plugin 'shawncplus/phpcomplete.vim'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
